@@ -1,0 +1,108 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="goBack()" style="color: white;">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ painting?.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <img [src]="painting?.primaryImage" [alt]="painting?.title">
+    <ion-card-header>
+        <ion-card-title>{{ painting?.title }}</ion-card-title>
+        <ion-card-subtitle>{{ painting.artistDisplayName ? painting.artistDisplayName : 'UNKNOWN' }}</ion-card-subtitle>
+        <ion-card-subtitle>{{ painting.department }}</ion-card-subtitle>
+      <ion-button fill="clear" class="like-button" (click)="likePainting(painting, $event)">
+        <ion-icon class="like" [name]="isLiked(painting) ? 'heart' : 'heart-outline'"></ion-icon>
+      </ion-button>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label><ion-card-subtitle>date</ion-card-subtitle>{{ painting?.objectDate }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label><ion-card-subtitle>medium</ion-card-subtitle>{{ painting?.medium }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label><ion-card-subtitle>dimensions</ion-card-subtitle>{{ painting?.dimensions }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <div class="commentSEC">
+        <ion-card-title >Comments</ion-card-title>
+      <ion-button fill="clear" (click)="toggleComments()">
+        <ion-icon [name]="showComments ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+      </ion-button>
+    </div>
+    </ion-card-header>
+    <ion-card-content *ngIf="showComments">
+      <div *ngIf="errorMessage">{{ errorMessage }}</div>
+      <div *ngIf="comments.length > 0">
+        <ion-list>
+          <ion-item *ngFor="let comment of comments">
+            <ion-label>
+              <h2>{{ comment.username }}</h2>
+              <p>{{ comment.comment }}</p>
+              <p><small>{{ comment.timestamp | date: 'short' }}</small></p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-card-content>
+  </ion-card>
+<div class="postComment">
+  <ion-card >
+    <ion-card-header>
+      <div class="addSEC">
+        <ion-card-title>Post a Comment</ion-card-title>
+      <ion-button fill="clear" (click)="toggleCommentForm()">
+        <ion-icon class="post" [name]="showCommentForm ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+      </ion-button>
+    </div>
+    </ion-card-header>
+    <ion-card-content>
+      <form *ngIf="showCommentForm" [formGroup]="commentForm" (ngSubmit)="postComment()">
+        <ion-item>
+          <ion-label position="floating">Username</ion-label>
+          <ion-input formControlName="name" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Comment</ion-label>
+          <ion-textarea formControlName="comment" required></ion-textarea>
+        </ion-item>
+        <div *ngIf="commentForm.invalid && (commentForm.dirty || commentForm.touched)">
+          <div *ngIf="commentForm.get('name')?.hasError('required')">Username is required.</div>
+          <div *ngIf="commentForm.get('name')?.hasError('minlength')">Username must be at least 2 characters long.</div>
+          <div *ngIf="commentForm.get('name')?.hasError('pattern')">Comment must only contain alphabetic characters.</div>
+          <div *ngIf="commentForm.get('comment')?.hasError('required')">Comment is required.</div>
+          <div *ngIf="commentForm.get('comment')?.hasError('minlength')">Comment must be at least 2 characters long.</div>
+          <div *ngIf="commentForm.get('comment')?.hasError('pattern')">Comment must only contain alphabetic characters.</div>
+        </div>
+        <ion-button expand="block" type="submit" [disabled]="commentForm.invalid">Submit Comment</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</div>
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+

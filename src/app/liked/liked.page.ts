@@ -1,30 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { MetApiService } from '../services/met-api.service';
 import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  selector: 'app-liked',
+  templateUrl: './liked.page.html',
+  styleUrls: ['./liked.page.scss'],
 })
-export class HomePage implements OnInit {
-  paintings: any[] = [];
+export class LikedPage implements OnInit {
+  likedPaintings: any[] = [];
 
-  constructor(private metApiService: MetApiService, private navCtrl: NavController) {}
+  constructor(private navCtrl: NavController) {}
 
   ngOnInit() {
-    this.metApiService.searchPaintings('painting').subscribe((response: any) => {
-      if (response.objectIDs) {
-        response.objectIDs.slice(1, 15).forEach((objectID: number) => {
-          this.metApiService.getPaintingDetails(objectID).subscribe((details: any) => {
-            if (details.primaryImage) { 
-              details.artistDisplayName = details.artistDisplayName || 'UNKNOWN'; // Default artistDisplayName to 'UNKNOWN'
-              this.paintings.push(details);
-            }
-          });
-        });
-      }
-    });
+    this.loadLikedPaintings();
+  }
+
+  ionViewWillEnter() {
+    this.loadLikedPaintings();
+  }
+
+  loadLikedPaintings() {
+    this.likedPaintings = JSON.parse(localStorage.getItem('likedPaintings') || '[]');
   }
 
   openDetails(painting: any) {
@@ -44,6 +40,7 @@ export class HomePage implements OnInit {
     }
     
     localStorage.setItem('likedPaintings', JSON.stringify(likedPaintings));
+    this.loadLikedPaintings(); // Refresh the liked paintings list
   }
 
   isLiked(painting: any): boolean {

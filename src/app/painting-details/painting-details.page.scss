@@ -1,0 +1,66 @@
+/* Ensure ion-toolbar is styled consistently */
+ion-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  padding: 10px;
+  --background: var(--ion-color-primary); 
+  color: #0f0e0e; 
+}
+
+
+/* Card styling */
+ion-card {
+  margin: 10px; /* Match margin to home page */
+  padding: 10px; /* Match padding to home page */
+  box-sizing: border-box;
+  height: fit-content; /* Allow card height to adjust based on content */
+  position: relative; /* Ensure positioning is relative for like button */
+  /* Removed hover effect */
+}
+
+/* Styling for card title and subtitle */
+ion-card-title {
+  font-size: 1rem; /* Match font size to home page */
+}
+
+ion-card-subtitle {
+  font-size: 0.8rem; /* Match font size to home page */
+  color: var(--ion-color-medium); /* Match subtitle color */
+}
+
+/* Styling for card content */
+ion-card-content {
+  font-size: 1rem; /* Match font size to home page */
+}
+
+/* Like button positioning */
+.like-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0; /* Ensure no extra padding */
+  transform: translateY(0); /* Reset transform for proper positioning */
+  z-index: 1; /* Ensure button is above other content */
+}
+
+/* Sections for comments and post comment */
+.commentSEC, .addSEC {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Center items within the section */
+}
+
+.addSEC ion-card-title, .commentSEC ion-card-title {
+  margin-right: auto; /* Push title to the left */
+}
+
+.addSEC ion-button, .commentSEC ion-button {
+  margin-left: auto; /* Push button to the right */
+}
+
+.postComment {
+  margin-bottom: 100px; /* Ensure spacing at the bottom for consistency */
+}

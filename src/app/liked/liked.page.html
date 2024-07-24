@@ -1,21 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Met Museum Paintings</ion-title>
-    <div class="found">
-      <p>Found {{ paintings.length }}</p>
-    </div>
+    <ion-title>Liked Paintings</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="masonry-grid">
-    <div class="masonry-item" *ngFor="let painting of paintings">
+  <div class="Card container">
+    <div class="card-group" *ngFor="let painting of likedPaintings">
       <ion-card>
         <img [alt]="painting.title" [src]="painting.primaryImage" />
         <ion-card-header>
-          <ion-card-title>{{ painting.title }}</ion-card-title>
-          <ion-card-subtitle>{{ painting.department }}</ion-card-subtitle>
-          <ion-card-subtitle>{{ painting.artistDisplayName }}</ion-card-subtitle>
+
+            <ion-card-title>{{ painting.title }}</ion-card-title>
+            <ion-card-subtitle>{{ painting.department }}</ion-card-subtitle>
+            <ion-card-subtitle>{{ painting.artistDisplayName }}</ion-card-subtitle>
+
           <ion-button fill="clear" class="like-button" (click)="likePainting(painting, $event)">
             <ion-icon [name]="isLiked(painting) ? 'heart' : 'heart-outline'"></ion-icon>
           </ion-button>
@@ -27,17 +26,6 @@
     </div>
   </div>
 </ion-content>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

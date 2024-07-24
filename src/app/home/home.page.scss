@@ -1,27 +1,54 @@
-#container {
-  text-align: center;
+/* Ensure ion-toolbar is centered and does not interfere with card layout */
+ion-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  padding: 10px;
+  // --background: var(--ion-color-primary); 
+  // color: #0f0e0e; 
+}
+body{
+  --background: var(--ion-color-primary); 
+}
 
+/* Grid layout for cards */
+.Card.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px; /* Adjust gap between cards */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Styling for individual cards */
+ion-card {
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+ion-card:hover {
+  transform: translateY(-10px); /* Adjust for a subtle lift */
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Styling for card content */
+ion-card-title {
+  font-size: 1rem;
+}
+
+ion-card-subtitle {
+  font-size: 0.8rem;
+}
+
+/* Styling for like button */
+.like-button {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+  top: 10px;
+  right: 10px;
+  padding: 0; /* Ensure no extra padding */
+  transform: translateY(0); /* Reset transform for positioning */
+  z-index: 1; /* Ensure button is clickable and above other content */
 }

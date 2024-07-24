@@ -1,0 +1,40 @@
+ion-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.Card.container {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+ion-card {
+  flex: 1;
+  width: 90%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+ion-card:hover {
+  transform: translateY(-20px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+}
+
+
+ion-card-title {
+  font-size: 1rem;
+}
+
+ion-card-subtitle {
+  font-size: 0.8rem;
+}
+
+.like-button {
+  margin-left: auto;
+  padding: 0; /* Ensure no extra padding */
+  transform: translateY(70%);
+}
+
